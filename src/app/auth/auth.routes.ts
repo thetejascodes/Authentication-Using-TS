@@ -8,4 +8,4 @@ const authController = new AuthController()
 
 authRouter.post('/sign-up',authController.handleSignup.bind(authController))
 
-
+authRouter.post('/sign-in',authController.handleSignin.bind(authController))
