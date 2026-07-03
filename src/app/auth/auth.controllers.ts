@@ -5,6 +5,7 @@ import { db } from '../../db/index.js'
 import { users } from '../../db/schema.js'
 import { eq } from 'drizzle-orm'
 import { randomBytes, createHmac } from 'node:crypto'
+import {createUserToken} from './utils/jwt.js'
 class AuthController {
     public async handleSignup(req: Request, res: Response) {
         const validationResult = await signupPayloadModel.safeParseAsync(req.body)
@@ -69,12 +70,11 @@ class AuthController {
         }
         return res.status(200).json({
             message: 'signin successful',
-            data:{token:1}
+            data:{token:createUserToken({ id: userSelect.id })}
         })
     }
 
-
-
+    
 }
 
 export default AuthController;
